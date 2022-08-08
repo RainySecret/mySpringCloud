@@ -1,0 +1,22 @@
+#spring:
+#  application:
+#    name: cloud-provider
+#server:
+#  port: 8081
+#
+#eureka:
+#  client:
+#    #此客户端是否获取eureka服务器注册表上的注册信息，默认为true
+#    fetch-registry: false
+#    #实例是否在eureka服务器上注册自己的信息以供其他服务发现，默认为true,即自己注册自己。
+#    register-with-eureka: true
+#    service-url:
+#      #defaultZone 这个是不会提示的，此处需要自己写
+#      #实际上属性应该是service-url,这个属性是个map（key-value）格式；当key是defaultZone的时候才能被解析；所以这里没有提示，
+#      #但是自己还需要写一个defaultZone；
+#      defaultZone: http://localhost:8761/eureka
+#  #服务注册中心实例的主机名
+#  instance:
+#    hostname: 127.0.0.1
+#    prefer-ip-address: true
+#    instance-id: 127.0.0.1:8081
