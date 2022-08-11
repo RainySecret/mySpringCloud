@@ -9,7 +9,7 @@ import lombok.Setter;
  * @author Administrator
  * @date 2022/6/1
  */
-public class Main {
+public class MainTest {
 
     public static void main(String[] args) {
         Long a = System.currentTimeMillis();

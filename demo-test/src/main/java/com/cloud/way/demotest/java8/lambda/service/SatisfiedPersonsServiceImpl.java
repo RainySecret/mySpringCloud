@@ -1,6 +1,6 @@
-package com.cloud.way.demotest.lambda.service;
+package com.cloud.way.demotest.java8.lambda.service;
 
-import com.cloud.way.demotest.lambda.entity.Person;
+import com.cloud.way.demotest.java8.lambda.entity.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

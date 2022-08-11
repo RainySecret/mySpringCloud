@@ -1,4 +1,4 @@
-package com.cloud.way.demotest.lambda.entity;
+package com.cloud.way.demotest.java8.lambda.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

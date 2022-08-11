@@ -1,4 +1,4 @@
-package com.cloud.way.demotest.lambda.service;
+package com.cloud.way.demotest.java8.lambda.service;
 
 /**
  * @author Administrator

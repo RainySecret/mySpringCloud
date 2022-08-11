@@ -1,4 +1,4 @@
-package com.cloud.way.demotest.lambda.functionInterface;
+package com.cloud.way.demotest.java8.lambda.functionInterface;
 
 /**
  * @author Administrator
