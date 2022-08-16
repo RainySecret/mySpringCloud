@@ -21,7 +21,8 @@
         <module>eureka-server</module>
         <module>cloud-provider</module>
         <module>cloud-consumer</module>
-        <module>demo-test</module>
+        <module>cloud-mock</module>
+        <module>cloud-gateway</module>
     </modules>
 
     <properties>
