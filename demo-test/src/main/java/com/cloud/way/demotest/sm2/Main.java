@@ -7,12 +7,35 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.SM2;
+import cn.hutool.crypto.symmetric.SM4;
 
+import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 
 public class Main {
 
     static String txt = "Hello World";
+
+    public static void main(String[] args) {
+
+        smSign();
+
+//        test1();
+//        System.out.println("--------------------华丽的分割线------------------------");
+//        test2();
+//        System.out.println("--------------------华丽的分割线------------------------");
+//        test3();
+//        System.out.println("--------------------华丽的分割线------------------------");
+//        test4();
+//        System.out.println("--------------------华丽的分割线------------------------");
+//        test5();
+//        System.out.println("--------------------华丽的分割线------------------------");
+//        test6();
+//        System.out.println("--------------------华丽的分割线------------------------");
+//        test7();
+//        System.out.println("--------------------华丽的分割线------------------------");
+//        test8();
+    }
 
     /***
      * 随机生成的密钥对加密或解密
@@ -76,7 +99,7 @@ public class Main {
         String privateKey = "MIGIAgEAMBQGCCqBHM9VAYItBggqgRzPVQGCLQRtMGsCAQEEIIjqPkShc43zuL/68DMWYC1c1XePqKqeaSHwEpRAL8Y+oUQDQgAE7UEXWQuCscVXMhiHy/DTpWTpcna3K5+VbzN3MHGk5BgS1yOEKqi8xXj1sOiLnvjBW64ENAkog7x3bJkeXAMfaA==";
         String publicKey = "MFowFAYIKoEcz1UBgi0GCCqBHM9VAYItA0IABO1BF1kLgrHFVzIYh8vw06Vk6XJ2tyuflW8zdzBxpOQYEtcjhCqovMV49bDoi574wVuuBDQJKIO8d2yZHlwDH2g=";
 
-                SM2 sm2 = SmUtil.sm2(Base64.decode(privateKey), Base64.decode(publicKey));
+        SM2 sm2 = SmUtil.sm2(Base64.decode(privateKey), Base64.decode(publicKey));
         String encryptStr = sm2.encryptBcd(txt, KeyType.PublicKey);
         String decryptStr = StrUtil.utf8Str(sm2.decryptFromBcd(encryptStr, KeyType.PrivateKey));
 
@@ -184,22 +207,34 @@ public class Main {
         System.out.print("verify888:" + verify);
     }
 
-    public static void main(String[] args) {
+    /**
+     * SM4加解密，SM2加签验签
+     */
+    public static void smSign() {
+        /*sm4密钥*/
+        String sm4Key = "u25tkqmv6mugo2hf";
+        SM4 sm4 = new SM4(sm4Key.getBytes(StandardCharsets.UTF_8));
 
-        /*test1();*/
-        System.out.println("--------------------华丽的分割线------------------------");
-        test2();
-        /*System.out.println("--------------------华丽的分割线------------------------");
-        test3();*/
-        /*System.out.println("--------------------华丽的分割线------------------------");
-        test4();
-        System.out.println("--------------------华丽的分割线------------------------");
-        test5();
-        System.out.println("--------------------华丽的分割线------------------------");
-        test6();
-        System.out.println("--------------------华丽的分割线------------------------");
-        test7();
-        System.out.println("--------------------华丽的分割线------------------------");
-        test8();*/
+        /*sm2公钥*/
+        String publicKey = "02e87b5a6736f9fd66cf866fbfa6fb9115d37969829b1fcf5c7d46fd09a98e2d26";
+        /*sm2私钥*/
+        String privateKey = "3be034efaffac6e015a865f0d06cea623b388f6498f2ae9427de7b500be8a72d";
+
+        SM2 sm2 = new SM2(privateKey,publicKey);
+
+        //明文参数
+        String content = "{\"queryType\":\"1\",\"queryCode\":\"610523199005150021\"}";
+        System.out.println(content);
+
+        //使用sm4将明文加密为密文
+        String encryptParam = sm4.encryptHex(content);
+        System.out.println(encryptParam);
+
+        //使用sm2将sm4加密后的密文参数进行加签处理
+        String signStr = sm2.signHex(encryptParam);
+        System.out.println(signStr);
+
+        System.out.println(sm4.decryptStr("3498637ae85a80acc102aea2f3588a04aa716337c5e29d796134f5fbfa7d1a369fb83f19bb6efc79162051a909d9d71cddb85f743fc6e7f4dcc34007449353c6"));
+
     }
 }
