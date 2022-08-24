@@ -12,7 +12,11 @@ import cn.hutool.crypto.symmetric.SM4;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 
-public class Main {
+/**
+ * 国密加解密验签测试类
+ * @author Way
+ */
+public class SMTest {
 
     static String txt = "Hello World";
 
@@ -102,7 +106,6 @@ public class Main {
         SM2 sm2 = SmUtil.sm2(Base64.decode(privateKey), Base64.decode(publicKey));
         String encryptStr = sm2.encryptBcd(txt, KeyType.PublicKey);
         String decryptStr = StrUtil.utf8Str(sm2.decryptFromBcd(encryptStr, KeyType.PrivateKey));
-
         System.out.println("密文:" + encryptStr);
         System.out.println("明文:" + decryptStr);
     }
@@ -212,13 +215,13 @@ public class Main {
      */
     public static void smSign() {
         /*sm4密钥*/
-        String sm4Key = "u25tkqmv6mugo2hf";
+        String sm4Key = "jfy184899wit3k6m";
         SM4 sm4 = new SM4(sm4Key.getBytes(StandardCharsets.UTF_8));
 
         /*sm2公钥*/
-        String publicKey = "02e87b5a6736f9fd66cf866fbfa6fb9115d37969829b1fcf5c7d46fd09a98e2d26";
+        String publicKey = "0218096cc0679968cc049130d7efe0d671795abc9fc09b9b9c03add2d756fdf473";
         /*sm2私钥*/
-        String privateKey = "3be034efaffac6e015a865f0d06cea623b388f6498f2ae9427de7b500be8a72d";
+        String privateKey = "00a65032ae9f2f85f33b50f81229dcbed7f5ec763f152517e334b8ffb426c28835";
 
         SM2 sm2 = new SM2(privateKey,publicKey);
 
@@ -234,7 +237,7 @@ public class Main {
         String signStr = sm2.signHex(encryptParam);
         System.out.println(signStr);
 
-        System.out.println(sm4.decryptStr("3498637ae85a80acc102aea2f3588a04aa716337c5e29d796134f5fbfa7d1a369fb83f19bb6efc79162051a909d9d71cddb85f743fc6e7f4dcc34007449353c6"));
+        System.out.println(sm4.decryptStr("8ce523b055aca9e79ba7092d3f85101786bda2e604fff6a9c2d28afc779d03ae16985af44009adeaa79d2aa000ef1ecc"));
 
     }
 }

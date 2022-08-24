@@ -31,7 +31,7 @@ public class TestServiceImpl implements TestService {
         //当使用@LoadBalanced负载均衡注解时，需通过服务名调用而不是ip:port的形式
         String prefix = "http://" + "cloud-provider";
 //        String prefix = "http://localhost:8081";
-        String url = prefix + "/test/getHello";
+        String url = prefix + "/provider/getHello";
 
         String restResult = restTemplate.postForObject(url, null, String.class);
         log.info("restTemplate：" + restResult);

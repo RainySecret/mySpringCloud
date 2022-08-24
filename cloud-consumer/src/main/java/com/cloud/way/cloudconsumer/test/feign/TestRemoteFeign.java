@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient("cloud-provider")
 public interface TestRemoteFeign {
 
-    @PostMapping(value = "/test/getHello")
+    @PostMapping(value = "/provider/getHello")
     String getHello();
 }
